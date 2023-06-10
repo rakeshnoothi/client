@@ -70,27 +70,20 @@ const Slider = () => {
     console.log("rendered");
     console.log(displayImage.imageIndex, displayImage.translateValue);
     return (
-        <div className="relative min-w-full aspect-[144/47]  flex overflow-hidden ">
+        <div className="relative min-w-full aspect-[144/47] flex overflow-hidden ">
             <div
-                className={`flex w-[300%] h-full  transition ${displayImage.translateValue}  ease-linear duration-500 `}
+                className={`flex w-[${sliderImages.length}00%] h-full  transition ${displayImage.translateValue}  ease-linear duration-500 `}
             >
-                <img
-                    src={sliderImages[0]}
-                    alt=""
-                    className="w-[100%]  object-cover"
-                />
-
-                <img
-                    src={sliderImages[1]}
-                    alt="iam image"
-                    className="w-[100%]  object-cover"
-                />
-
-                <img
-                    src={sliderImages[2]}
-                    alt=""
-                    className="w-[100%]  object-cover"
-                />
+                {sliderImages.map((sliderImage) => {
+                    return (
+                        <img
+                            key={sliderImage}
+                            src={sliderImage}
+                            alt=""
+                            className="w-[100%]  object-cover"
+                        />
+                    );
+                })}
             </div>
             <SliderNavigationButtons
                 handleSliderNavigation={handleSliderNavigation}

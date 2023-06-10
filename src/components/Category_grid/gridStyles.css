@@ -1,0 +1,62 @@
+.container {
+    display: grid;
+    grid-template-columns: 0.7fr 1.4fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1.2fr 0.1fr 1.9fr;
+    gap: 16px 16px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "empty1 empty1 kids kids empty2 empty2"
+        "empty1 empty1 kids kids sale empty3"
+        "women women men men sale empty3"
+        "women women men men shoes shoes"
+        "empty4 accessories men men shoes shoes"
+        "empty4 accessories empty5 empty5 empty5 empty5";
+}
+
+.container > * {
+    background-color: transparent;
+}
+
+.empty1 {
+    grid-area: empty1;
+}
+
+.kids {
+    grid-area: kids;
+}
+
+.empty2 {
+    grid-area: empty2;
+}
+
+.sales {
+    grid-area: sale;
+}
+
+.women {
+    grid-area: women;
+}
+
+.men {
+    grid-area: men;
+}
+
+.empty3 {
+    grid-area: empty3;
+}
+
+.shoes {
+    grid-area: shoes;
+}
+
+.accessories {
+    grid-area: accessories;
+}
+
+.empty5 {
+    grid-area: empty5;
+}
+
+.empty4 {
+    grid-area: empty4;
+}
