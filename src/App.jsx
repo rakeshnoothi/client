@@ -7,18 +7,30 @@ import Footer from "./components/Footer/Footer";
 import CartItemsContext from "./utils/Cart_items_context/CartItemsContext";
 import { useState } from "react";
 import Cart from "./pages/Cart/Cart";
+import ProductFilterContext from "./utils/Product_filters_context/ProductFilterContext";
 
 const Layout = () => {
     const [cartItems, setCartItems] = useState([]);
+    const [filters, setFilters] = useState({
+        optionValues: {
+            minPrice: [1000, 2000, 3000, 4000, 5000],
+            maxPrice: [5000, 4000, 3000, 2000, 1000],
+            minSelectedPrice: 1000,
+            maxSelectedPrice: 5000,
+        },
+        selectedCheckBoxes: [],
+    });
 
     return (
-        <CartItemsContext value={[cartItems, setCartItems]}>
-            <div className="font-Roboto font-normal flex flex-col space-y-4">
-                <NavBar />
-                <Outlet />
-                <Footer />
-            </div>
-        </CartItemsContext>
+        <div className="font-Roboto font-normal flex flex-col space-y-4">
+            <ProductFilterContext value={[filters, setFilters]}>
+                <CartItemsContext value={[cartItems, setCartItems]}>
+                    <NavBar />
+                    <Outlet />
+                    <Footer />
+                </CartItemsContext>
+            </ProductFilterContext>
+        </div>
     );
 };
 
@@ -48,7 +60,6 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-    console.log("app rendered");
     return (
         <RouterProvider router={router}>
             <Layout />

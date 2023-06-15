@@ -67,8 +67,6 @@ const Slider = () => {
         }
     };
 
-    console.log("rendered");
-    console.log(displayImage.imageIndex, displayImage.translateValue);
     return (
         <div className="relative min-w-full aspect-[144/47] flex overflow-hidden ">
             <div

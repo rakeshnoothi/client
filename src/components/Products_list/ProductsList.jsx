@@ -1,38 +1,33 @@
 import Card from "../Card/Card";
-import {
-    categoryProductsListAccessories,
-    categoryProductsListKids,
-    categoryProductsListMen,
-    categoryProductsListWomen,
-} from "../../utils/products_page_productsDetails/categoryProductsList";
 import { useParams } from "react-router-dom";
+import filterProduct from "../../utils/product_filter_functions/filterProduct";
+import { useContext } from "react";
+import { FilterContext } from "../../utils/Product_filters_context/ProductFilterContext";
+import products from "../../utils/products_page_productsDetails/products";
 
 const ProductsList = () => {
+    const [filters] = useContext(FilterContext);
+
     const { productCategory } = useParams();
-    const returnProduct = () => {
-        if (productCategory === "men") {
-            return categoryProductsListMen;
-        }
-        if (productCategory === "women") {
-            return categoryProductsListWomen;
-        }
-        if (productCategory === "kids") {
-            return categoryProductsListKids;
-        }
-        if (productCategory === "accessories") {
-            return categoryProductsListAccessories;
-        }
+    const returnProductByCategory = () => {
+        return products.filter(
+            (categoryProduct) => categoryProduct.category === productCategory
+        );
     };
+
+    const priceFilteredProducts = filterProduct.priceFilter(
+        returnProductByCategory(),
+        filters.optionValues.minSelectedPrice,
+        filters.optionValues.maxSelectedPrice
+    );
+
+    const checkBoxFilteredProducts = priceFilteredProducts.filter((item) => {
+        return filters.selectedCheckBoxes.includes(item.productType);
+    });
+
     return (
         <div className="flex-grow flex flex-wrap">
-            <div className="">
-                <img
-                    src={categoryProductsListMen[1].bannerImage}
-                    alt=""
-                    className="w-full h-full"
-                />
-            </div>
-            {returnProduct().map((categoryProduct) => {
+            {checkBoxFilteredProducts.map((categoryProduct) => {
                 return (
                     <Card
                         key={categoryProduct.id}
